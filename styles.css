@@ -1,0 +1,28 @@
+body {
+  margin: 2rem;
+  color: #fff;
+  background-color: #121212;
+  font-family: inter, serif;
+  font-weight: 400;
+  font-size: 62.5%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* Header */
+.container {
+  max-width: 464px;
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid magenta;
+}
