@@ -16,12 +16,12 @@
   <body>
     <header>
       <div class="container header-content">
-        <h1 class="header-title">Find your film</h1>
-        <a href="./watchlist.html" class="wachlist">My Watchlist</a>
+        <h1 class="header-title">My Watchlist</h1>
+        <a href="./index.html" class="wachlist">Search for movies </a>
       </div>
     </header>
     <main>
-      <div class="container search-wrap bg-home">
+      <div class="container search-wrap">
         <div class="search-bar">
           <input class="input" type="text" placeholder="Blade Runner" />
           <button class="search">Search</button>
@@ -40,7 +40,7 @@
               <p>116 min</p>
               <p>Drama, Mystery, Sci-fi</p>
               <p class="movie-watchlist">
-                <i class="fa-solid fa-circle-plus watchlist-icon"></i>Watchlist
+                <i class="fa-solid fa-circle-minus watchlist-icon"></i>Watchlist
               </p>
             </div>
             <p class="movie-body">
@@ -50,11 +50,14 @@
           </div>
         </div>
 
-        <!-- No search-match display -->
-        <div class="wrong-search hidden">
-          <h3>
-            Unable to find what you’re looking for. Please try another search.
-          </h3>
+        <!-- Watch list empty -->
+        <div class="watchlist-empty">
+          <h3>Your watchlist is looking a little empty...</h3>
+
+          <a href="#" class="add-movies">
+            <i class="fa-solid fa-circle-plus watchlist-icon"></i>
+            Let’s add some movies!
+          </a>
         </div>
       </div>
     </main>
