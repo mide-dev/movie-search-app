@@ -26,7 +26,7 @@ p {
 h1 {
   font-weight: 800;
   font-size: 2.6rem;
-  line-height: 1.486rem;
+  line-height: 2.6rem;
 }
 
 h2 {
@@ -119,6 +119,14 @@ header {
   color: white;
 }
 
+.loader {
+  display: inline-block;
+  position: absolute;
+  width: 22px;
+  right: 25%;
+  bottom: 25%;
+}
+
 .input,
 .input::placeholder {
   font-size: 0.875rem;
@@ -150,6 +158,10 @@ header {
   padding-top: 2.625rem;
   padding-bottom: 1.2rem;
   border-bottom: 2px solid #2c2c2c;
+}
+
+.movie-wrap:last-child {
+  border-bottom: 0;
 }
 
 .title-ratings-wrap {
