@@ -76,7 +76,7 @@ async function getSearchResult() {
   }
 }
 
-// Get Indiviual movie data
+// Get each movie data
 async function getMovieData() {
   try {
     // import getSearchResult()
@@ -109,7 +109,7 @@ async function displayMovieData(e) {
     // import getMovieData func()
     let movieDataArray = await getMovieData();
 
-    // if movie not found, clear previous search and handle error.
+    // if movie not found, clear previous search and display error.
     if (movieDataArray === undefined) {
       while (displayMovies.firstChild) {
         displayMovies.removeChild(displayMovies.lastChild);
@@ -152,19 +152,38 @@ async function displayMovieData(e) {
 
     // hide preLoader
     hideLoader();
-    console.log(movieDataArray);
+    // console.log(movieDataArray);
 
-    // for (let i of movieDataArray) {
-    //   if (watchlist-btn.addEventListener('click')
-    // }
     // display movies
     movieDataArray.forEach((mov) => {
       displayMovies.insertAdjacentHTML("beforeend", html(mov));
     });
+
+    // add to watchlist
+    addToWatchlist();
   } catch (err) {
     displayError(err.message);
     return;
   }
+}
+
+// let user save movie to watchlist
+async function addToWatchlist() {
+  const retrieveMovies = await getMovieData();
+  if (!retrieveMovies.length > 0) return;
+
+  hideLoader();
+  const watchlistBtn = document.querySelectorAll(".watchlist-btn");
+
+  // loop through watchlist button, also get index of each button
+  watchlistBtn.forEach((movie, i) => {
+    // listen for click event
+    movie.addEventListener("click", () => {
+      // use index "i" to match clicked btn with retrieveMovies arr
+      // store index result in local storage
+      localStorage.setItem("movies", JSON.stringify(retrieveMovies[i]));
+    });
+  });
 }
 
 searchBar.addEventListener("submit", displayMovieData);
