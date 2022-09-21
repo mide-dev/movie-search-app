@@ -167,40 +167,65 @@ async function displayMovieData(e) {
   }
 }
 
-// saved movies catalog
+// initialize default array in localstorage
+(function () {
+  // if movie array available in localstorage => breakout of func;
+  if (localStorage.getItem("movies")) return;
+  // else, generate movie empty array
+  localStorage.setItem("movies", JSON.stringify([]));
+})();
 
-function myWatchList(obj) {}
+// user watchlist - accepts a movie object &
+//  an action to add/remove movie from storage
+function myWatchlist(movie, action) {
+  // get movie arr from local storage
+  const watchList = JSON.parse(localStorage.getItem("movies"));
+  // if add movie
+  if (action === "add") {
+    for (let data of watchList) {
+      // check if movie previously added to prevent duplicate
+      if (movie.Title === data.Title) {
+        console.log(`you've added this before`);
+        return;
+      }
+    }
+
+    // extract needed items from the movie arr to avoid storing unnecessary data
+    const importantData = {
+      ["Title"]: movie.Title,
+      ["Poster"]: movie.Poster,
+      ["imdbRating"]: movie.imdbRating,
+      ["Genre"]: movie.Genre,
+      ["Plot"]: movie.Plot,
+      ["Runtime"]: movie.Runtime,
+    };
+
+    // add extracted object to localstorage
+    watchList.push(importantData);
+    localStorage.setItem("movies", JSON.stringify(watchList));
+  }
+}
 
 // let user save movie to watchlist
 async function addToWatchlist() {
   const retrieveMovies = await getMovieData();
   if (retrieveMovies.length === 0) return;
 
-  const watchList = JSON.parse(localStorage.getItem("movies"));
   //hide pre-loader
   hideLoader();
 
   const watchlistBtn = document.querySelectorAll(".watchlist-btn");
-
   // use watchlist-btn index to match
   // btn clicked with movies in retrieveMovie arr
   watchlistBtn.forEach((movie, i) => {
     movie.addEventListener("click", () => {
-      // if data not available in storage
-      // Add data to localStorage Array
-      for (let data of watchList) {
-        if (watchList.length === 0) return;
-        if (retrieveMovies[i].Title === data.Title) {
-          console.log(`you've added this before`);
-          return;
-        }
-      }
-      watchList.push(retrieveMovies[i]);
-      // add movie to watchlist
-      localStorage.setItem("movies", JSON.stringify(watchList));
+      myWatchlist(retrieveMovies[i], "add");
     });
   });
 }
+
+// let user delete movie from watchlist
+async function removeFromWatchlist() {}
 
 searchBar.addEventListener("submit", displayMovieData);
 
