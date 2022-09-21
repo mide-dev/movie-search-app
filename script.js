@@ -167,21 +167,37 @@ async function displayMovieData(e) {
   }
 }
 
+// saved movies catalog
+
+function myWatchList(obj) {}
+
 // let user save movie to watchlist
 async function addToWatchlist() {
   const retrieveMovies = await getMovieData();
-  if (!retrieveMovies.length > 0) return;
+  if (retrieveMovies.length === 0) return;
 
+  const watchList = JSON.parse(localStorage.getItem("movies"));
+  //hide pre-loader
   hideLoader();
+
   const watchlistBtn = document.querySelectorAll(".watchlist-btn");
 
-  // loop through watchlist button, also get index of each button
+  // use watchlist-btn index to match
+  // btn clicked with movies in retrieveMovie arr
   watchlistBtn.forEach((movie, i) => {
-    // listen for click event
     movie.addEventListener("click", () => {
-      // use index "i" to match clicked btn with retrieveMovies arr
-      // store index result in local storage
-      localStorage.setItem("movies", JSON.stringify(retrieveMovies[i]));
+      // if data not available in storage
+      // Add data to localStorage Array
+      for (let data of watchList) {
+        if (watchList.length === 0) return;
+        if (retrieveMovies[i].Title === data.Title) {
+          console.log(`you've added this before`);
+          return;
+        }
+      }
+      watchList.push(retrieveMovies[i]);
+      // add movie to watchlist
+      localStorage.setItem("movies", JSON.stringify(watchList));
     });
   });
 }
