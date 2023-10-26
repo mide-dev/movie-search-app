@@ -1,9 +1,9 @@
 # Movie Search App
 
 The Movie Search App is a simple web application that allows you to look up movies and save them to watchlist using data from the movie database API.
-![Movie Search App Screenshot](first_ss)
+![Movie Search App Screenshot](first_ss.png)
 
-![Movie Search App Screenshot](second_ss)
+![Movie Search App Screenshot](second_ss.png)
 
 ## Features
 
